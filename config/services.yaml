@@ -8,3 +8,8 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
+
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
