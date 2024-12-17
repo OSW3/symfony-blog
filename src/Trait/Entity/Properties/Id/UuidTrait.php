@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 trait UuidTrait
 {
-    // #[Groups(['id'])]
+    #[Groups(['id'])]
     #[ORM\Id]
     #[ORM\Column(type: "uuid", unique: true)]
     #[ORM\GeneratedValue(strategy: "CUSTOM")]

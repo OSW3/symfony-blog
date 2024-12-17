@@ -7,7 +7,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 trait IdTrait
 {
-    // #[Groups(['id'])]
+    #[Groups(['id'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: "id", type: Types::INTEGER, options: ['unsigned' => true])]

@@ -10,19 +10,25 @@ use OSW3\Blog\Repository\PostRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use OSW3\Blog\Trait\Entity\Properties\Id\UuidTrait;
+use OSW3\Blog\Trait\Entity\Properties\Slug\SlugTrait;
+use OSW3\Blog\Trait\Entity\Properties\Title\TitleTrait;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[ORM\Table(name: 'blog_post')]
 class Post
 {
     use UuidTrait;
+    use TitleTrait;
+    use SlugTrait;
 
-    #[ORM\Column(name: 'title', type: Types::STRING, length: 255, nullable: false)]
-    private ?string $title = null;
+    const SLUG_ATTRIBUTES = [
+        'properties' => ['title'],
+        'length' => 255
+    ];
 
-    #[ORM\Column(name: 'slug', type: Types::STRING, length: 255, nullable: false)]
-    #[Gedmo\Slug(fields: ['title'])]
-    private ?string $slug = null;
+    const TITLE_ATTRIBUTES = [
+        'length' => 255
+    ];
 
     #[ORM\Column(name: 'excerpt', type: Types::STRING, length: 255, nullable: true)]
     private ?string $excerpt = null;
@@ -60,29 +66,7 @@ class Post
     }
 
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
 
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    // public function setSlug(string $slug): static
-    // {
-    //     $this->slug = $slug;
-
-    //     return $this;
-    // }
 
     public function getExcerpt(): ?string
     {
