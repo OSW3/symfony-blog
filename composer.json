@@ -24,6 +24,7 @@
         "doctrine/orm": "^3.3",
         "gedmo/doctrine-extensions": "*",
         "ramsey/uuid-doctrine": "^2.1",
-        "symfony/options-resolver": "6.4.*"
+        "symfony/options-resolver": "6.4.*",
+        "symfony/twig-bundle": "6.4.*"
     }
 }

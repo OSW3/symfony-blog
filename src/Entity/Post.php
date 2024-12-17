@@ -43,13 +43,13 @@ class Post
     private ?bool $isCommentAllowed = true;
 
     #[ORM\Column(name: "counter_read", type: Types::INTEGER, nullable: false)]
-    private ?int $readCounter = null;
+    private int $readCounter = 0;
 
     #[ORM\Column(name: "counter_like", type: Types::INTEGER, nullable: false)]
-    private ?int $likeCounter = null;
+    private int $likeCounter = 0;
 
     #[ORM\Column(name: "counter_dislike", type: Types::INTEGER, nullable: false)]
-    private ?int $dislikeCounter = null;
+    private int $dislikeCounter = 0;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
     private ?self $parent = null;
@@ -116,7 +116,7 @@ class Post
         return $this;
     }
 
-    public function getReadCounter(): ?int
+    public function getReadCounter(): int
     {
         return $this->readCounter;
     }
@@ -128,7 +128,7 @@ class Post
         return $this;
     }
 
-    public function getLikeCounter(): ?int
+    public function getLikeCounter(): int
     {
         return $this->likeCounter;
     }
@@ -139,7 +139,7 @@ class Post
         return $this;
     }
 
-    public function getDislikeCounter(): ?int
+    public function getDislikeCounter(): int
     {
         return $this->dislikeCounter;
     }
