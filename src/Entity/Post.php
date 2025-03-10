@@ -45,11 +45,11 @@ class Post
     #[ORM\Column(name: "counter_read", type: Types::INTEGER, nullable: false)]
     private int $readCounter = 0;
 
-    #[ORM\Column(name: "counter_like", type: Types::INTEGER, nullable: false)]
-    private int $likeCounter = 0;
+    // #[ORM\Column(name: "counter_like", type: Types::INTEGER, nullable: false)]
+    // private int $likeCounter = 0;
 
-    #[ORM\Column(name: "counter_dislike", type: Types::INTEGER, nullable: false)]
-    private int $dislikeCounter = 0;
+    // #[ORM\Column(name: "counter_dislike", type: Types::INTEGER, nullable: false)]
+    // private int $dislikeCounter = 0;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
     private ?self $parent = null;
@@ -59,6 +59,90 @@ class Post
      */
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
     private Collection $children;
+
+
+
+
+
+
+    // /**
+    //  * Text only content
+    //  * 
+    //  * @ORM\Column(type="text")
+    //  */
+    // private $contentText;
+
+    // /**
+    //  * @ORM\Column(type="string", length=10, nullable=true)
+    //  */
+    // private $locale;
+    // /**
+    //  * The language of the post
+    //  * 
+    //  * @ORM\Column(type="string", length=2, nullable=true, options={"fixed" = true})
+    //  */
+    // private $lang;
+
+
+    
+
+
+    // // DATES
+    // // --
+
+    // /**
+    //  * @ORM\Column(type="datetime")
+    //  */
+    // private $createAt;
+
+    // /**
+    //  * @ORM\Column(type="datetime", nullable=true)
+    //  */
+    // private $publishAt;
+
+    // /**
+    //  * @ORM\Column(type="datetime", nullable=true)
+    //  */
+    // private $updatedAt;
+
+
+    // // RELATIONSHIPS
+    // // --
+    // // - ManyToOne
+    // // - ManyToMany
+    // // - OneToMany
+
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+    //  * @ORM\JoinColumn(nullable=false)
+    //  */
+    // private $author;
+
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Media::class)
+    //  */
+    // private $illustration;
+
+
+    // /**
+    //  * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="posts")
+    //  * , cascade={"persist"}
+    //  */
+    // private $categories;
+
+    // /**
+    //  * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
+    //  */
+    // private $comments;
+
+
+
+    
+
+
+
+
+
 
     public function __construct()
     {
@@ -128,27 +212,27 @@ class Post
         return $this;
     }
 
-    public function getLikeCounter(): int
-    {
-        return $this->likeCounter;
-    }
-    public function setLikeCounter(int $likeCounter): static
-    {
-        $this->likeCounter = $likeCounter;
+    // public function getLikeCounter(): int
+    // {
+    //     return $this->likeCounter;
+    // }
+    // public function setLikeCounter(int $likeCounter): static
+    // {
+    //     $this->likeCounter = $likeCounter;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getDislikeCounter(): int
-    {
-        return $this->dislikeCounter;
-    }
-    public function setDislikeCounter(int $dislikeCounter): static
-    {
-        $this->dislikeCounter = $dislikeCounter;
+    // public function getDislikeCounter(): int
+    // {
+    //     return $this->dislikeCounter;
+    // }
+    // public function setDislikeCounter(int $dislikeCounter): static
+    // {
+    //     $this->dislikeCounter = $dislikeCounter;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getParent(): ?self
     {
