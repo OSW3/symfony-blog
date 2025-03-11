@@ -53,7 +53,6 @@ class Configuration implements ConfigurationInterface
 			file_put_contents($configFile, Yaml::dump([
 				static::NAME => $configArray
 			], 4));
-			
 		}
 	}
 

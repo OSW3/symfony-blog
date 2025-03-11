@@ -1,0 +1,5 @@
+controllers:
+    resource   : '@BlogBundle/Controller/'
+    type       : attribute
+    name_prefix: 'blog:'
+

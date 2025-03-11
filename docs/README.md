@@ -13,6 +13,12 @@ return [
 ```
 
 
+
+
+
+
+
+
 ## Workflow states
 
 - draft (default) → Le post est en cours d'écriture.
