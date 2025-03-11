@@ -36,6 +36,9 @@ trait PostTrait
     #[ORM\Column(name: "`content`", type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
+    #[ORM\Column(name: "`content_text`", type: Types::TEXT, nullable: true)]
+    private ?string $contentText = null;
+
 
     // WORKFLOW
     // --
@@ -101,6 +104,17 @@ trait PostTrait
     public function setContent(?string $content): static
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getContentText(): ?string
+    {
+        return $this->contentText;
+    }
+    public function setContentText(?string $contentText): static
+    {
+        $this->contentText = $contentText;
 
         return $this;
     }

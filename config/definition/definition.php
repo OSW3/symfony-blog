@@ -8,5 +8,6 @@ return static function($definition)
         // Post single template
         // Is comment allowed (default for all post / override on post create )
         // Post default state
+        // Author entity
     ->end();
 };
