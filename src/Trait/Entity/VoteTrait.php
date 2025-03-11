@@ -1,7 +1,7 @@
 <?php 
 namespace OSW3\Blog\Trait\Entity;
 
-use OSW3\Faq\Enum\VoteType;
+use OSW3\Blog\Enum\VoteType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

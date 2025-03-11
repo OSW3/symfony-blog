@@ -1,5 +1,5 @@
 <?php
-namespace OSW3\Faq\Enum;
+namespace OSW3\Blog\Enum;
 
 use OSW3\Blog\Trait\Enum\EnumTrait;
 
