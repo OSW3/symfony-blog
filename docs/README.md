@@ -5,6 +5,7 @@
 composer require osw3/symfony-blog
 ```
 
+
 ```php 
 // config/bundle.php
 return [
@@ -13,9 +14,22 @@ return [
 ```
 
 
+Use Blog route and default controller
+```yaml 
+# config/routes.yaml
+_blog:
+    resource: '@BlogBundle/Resources/routes.yaml'
+    prefix: /blog
+```
+
+or create your controller and use blog Service
 
 
 
+```shell
+bin/console make:migration
+bin/console doctrine:migrations:migrate
+```
 
 
 
@@ -33,5 +47,4 @@ return [
 - rejected (rejeté) → Non validé après relecture.
 - flagged (signalé) → Contenu potentiellement problématique (modération requise).
 - pending_changes (modifications en attente) → Nécessite des corrections avant approbation.
-
 

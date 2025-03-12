@@ -66,9 +66,15 @@ trait PostTrait
     #[ORM\Column(name: "`datetime_publish`", type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $publishAt = null;
 
+    #[ORM\Column(name: "`reading_time`", type: Types::INTEGER, nullable: false)]
+    private int $readingTime = 0;
+
 
     // COUNTERS
     // --
+
+    #[ORM\Column(name: "`counter_open`", type: Types::INTEGER, nullable: false)]
+    private int $openCounter = 0;
 
     #[ORM\Column(name: "`counter_read`", type: Types::INTEGER, nullable: false)]
     private int $readCounter = 0;
@@ -78,6 +84,9 @@ trait PostTrait
 
     #[ORM\Column(name: "`counter_downvote`", type: Types::INTEGER, nullable: false)]
     private int $downvoteCounter = 0;
+
+    #[ORM\Column(name: "`counter_words`", type: Types::INTEGER, nullable: false)]
+    private int $wordsCounter = 0;
 
     // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -108,15 +117,24 @@ trait PostTrait
         return $this;
     }
 
+    #[ORM\PrePersist]
+    public function setContentText(): static
+    {
+        $this->contentText = strip_tags($this->content);
+
+        // Set Words count
+        preg_match_all('/\p{L}+/u', $this->contentText, $matches);
+        $this->wordsCounter = count($matches[0]);
+
+        // Ste reading time
+        $wordsPerMinute = 200;
+        $this->readingTime = ceil($this->wordsCounter / $wordsPerMinute);
+
+        return $this;
+    }
     public function getContentText(): ?string
     {
         return $this->contentText;
-    }
-    public function setContentText(?string $contentText): static
-    {
-        $this->contentText = $contentText;
-
-        return $this;
     }
 
 
@@ -188,9 +206,25 @@ trait PostTrait
         return $this->publishAt;
     }
 
+    public function getReadingTime(): int
+    {
+        return $this->readingTime;
+    }
+
 
     // COUNTERS
     // --
+
+    public function getOpenCounter(): int
+    {
+        return $this->openCounter;
+    }
+    public function incrementOpenCounter(): static
+    {
+        $this->openCounter++;
+
+        return $this;
+    }
 
     public function getReadCounter(): int
     {
@@ -223,5 +257,10 @@ trait PostTrait
         $this->downvoteCounter = $downvoteCounter;
 
         return $this;
+    }
+
+    public function getWordsCounter(): int
+    {
+        return $this->wordsCounter;
     }
 }

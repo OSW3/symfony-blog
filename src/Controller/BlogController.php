@@ -7,6 +7,7 @@ use OSW3\Blog\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use OSW3\Blog\DependencyInjection\Configuration;
+use OSW3\Blog\Service\PostService;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,19 +25,24 @@ final class BlogController extends AbstractController
     }
 
     #[Route('/posts', name: 'index')]
-    public function index(PostRepository $postRepository): Response
+    public function index(PostService $postService): Response
     {
-        $posts = $postRepository->findAll();
+        $posts = $postService->getPaged();
+        $total = $postService->count();
+        $pages = $postService->getPages();
 
         return $this->render($this->config['index']['template'], [
-            'posts' => $posts
+            'posts' => $posts,
+            'total' => $total,
+            'pages' => $pages,
         ]);
     }
 
     #[Route('/post/{id}', name: 'single')]
-    public function single(Post $post): Response
+    public function single(Post $post, PostService $postService): Response
     {
-
+        $postService->updateOpenCounter($post);
+        
         return $this->render($this->config['single']['template'], [
             'post' => $post
         ]);
