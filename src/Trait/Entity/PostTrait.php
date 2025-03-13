@@ -230,9 +230,9 @@ trait PostTrait
     {
         return $this->readCounter;
     }
-    public function setReadCounter(int $readCounter): static
+    public function incrementReadCounter(): static
     {
-        $this->readCounter = $readCounter;
+        $this->readCounter++;
 
         return $this;
     }

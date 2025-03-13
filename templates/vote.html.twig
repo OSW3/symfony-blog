@@ -1,0 +1,22 @@
+<button type="button" data-vote="up" data-post="{{ id }}">like (<span>{{ upVotes }}</span>)</button>
+<button type="button" data-vote="down" data-post="{{ id }}">dislike (<span>{{ downVotes }}</span>)</button>
+
+<script>
+document.querySelectorAll('[data-vote][data-post="{{id}}"]').forEach(btn => {
+    btn.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const voteType = btn.dataset.vote;
+        const button = event.target.closest('[data-vote][data-post]');
+        const url = voteType === 'up' 
+            ? "{{ url('blog:post:upvote', {id: id}) }}"
+            : "{{ url('blog:post:downvote', {id: id}) }}"
+        ;
+
+        fetch(url, { method: 'POST' })
+            .then(r => r.json())
+            .then(d => button.querySelector('span').textContent = voteType === 'up' ? d.upVotes : d.downVotes ); 
+    })
+})
+</script>
