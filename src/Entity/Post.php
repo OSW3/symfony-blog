@@ -28,6 +28,9 @@ class Post
     #[ORM\ManyToOne(inversedBy: 'posts')]
     private ?Category $category = null;
 
+    #[ORM\ManyToOne]
+    private ?Media $illustration = null;
+
 
     // OneToMany
 
@@ -87,6 +90,19 @@ class Post
 
         return $this;
     }
+
+    public function getIllustration(): ?Media
+    {
+        return $this->illustration;
+    }
+
+    public function setIllustration(?Media $illustration): static
+    {
+        $this->illustration = $illustration;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection<int, self>

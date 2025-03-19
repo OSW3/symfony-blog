@@ -23,6 +23,7 @@
         "doctrine/doctrine-migrations-bundle": "*",
         "doctrine/orm": "*",
         "gedmo/doctrine-extensions": "*",
+        "osw3/symfony-media": "*",
         "ramsey/uuid-doctrine": "*",
         "symfony/options-resolver": "*",
         "symfony/twig-bundle": "*"
